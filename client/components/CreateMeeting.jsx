@@ -1,6 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import { getAttendees } from '../actions/attendees'
+
+
 class CreateMeeting extends React.Component {
   constructor(props) {
     super(props)
@@ -11,6 +14,7 @@ class CreateMeeting extends React.Component {
 
     this.updateTitle = this.updateTitle.bind(this)
     this.addAttendee = this.addAttendee.bind(this)
+    this.handleClick = this.handleClick.bind(this)
     this.displayAttendees = this.displayAttendees.bind(this)
   }
 
@@ -44,20 +48,31 @@ class CreateMeeting extends React.Component {
     })
   }
 
+  handleClick() {
+    this.props.dispatch(getAttendees())
+    this.setState({ showMeeting: true,
+                    perSecWages: this.state.perSecWages,
+                    showCreateMeeting: false,
+                    showStartButton: false
+                   })
+    this.props.dispatch(startMeeting(this.props.attendees, this.props.meetingName, this.state.perSecWages))
+    this.setTimer()
+  }
+
   render() {
     return (
       <div className="container">
         <h2 className="title is-2">Create Meeting</h2>
         <div>
-          <label>Meeting title:</label>
+          <label>Meeting title: </label>
           <input ref="formTitle" type="text" onChange={this.updateTitle} />
         </div>
         <br />
         <div>
           <h4 className="title is-4">Add Attendee</h4>
-          <label>Name:</label>
+          <label>Name: </label>
           <input ref="formName" type="text" /><br />
-          <label>Wage:</label>
+          <label>Wage: </label>
           <input ref="formWage" type="text" /><br />
           <button onClick={this.addAttendee}>Add</button>
         </div>
@@ -67,6 +82,9 @@ class CreateMeeting extends React.Component {
           <ul>
             {this.displayAttendees()}
           </ul>
+        </div>
+        <div className= 'Button'>
+        <button> Start Button </button>
         </div>
       </div>
     )

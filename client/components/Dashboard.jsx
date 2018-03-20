@@ -14,7 +14,7 @@ const Dashboard = () => {
       <figure className="image is-128x128">
           <img src="images/pie-graph.svg"></img>
         </figure>
-        <a href="/#/meeting" className="button is-link is-rounded">Start</a>
+        <a href="/#/meeting" className="button is-link is-rounded">Start New Meeting</a>
       </div>
 
       <div className="column">
